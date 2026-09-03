@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello Burger | Menu</title>
+    
+    <!-- Importing Rounded Bold Sans Serif Fonts (Fredoka for Headers, Nunito for Body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        :root {
+            /* Brand Lookbook Colors */
+            --brand-orange: #FF6600;
+            --brand-yellow: #FFD400;
+            --brand-black: #222222;
+            --brand-white: #FFFFFF;
+            --bg-light: #FFF9F5;
+            --border-width: 3px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent; /* Remove tap highlight on mobile */
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--brand-black);
+            line-height: 1.6;
+            padding-bottom: 80px; /* Space for bottom nav or just breathing room */
+        }
+
+        h1, h2, h3, .brand-font {
+            font-family: 'Fredoka', sans-serif;
+        }
+
+        /* Header / Hero Section */
+        .header {
+            background-color: var(--brand-black);
+            padding: 20px 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-bottom: var(--border-width) solid var(--brand-orange);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-logo {
+            max-height: 50px; /* Smaller logo for sticky header */
+            width: auto;
+        }
+
+        /* Promo Slider Section */
+        .promo-slider-container {
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            border-bottom: var(--border-width) solid var(--brand-black);
+            background-color: var(--brand-black);
+        }
+
+        .promo-slider {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none; /* Firefox */
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .promo-slider::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, Opera */
+        }
+
+        .promo-slide {
+            flex: 0 0 100%; /* Takes full width of the container */
+            height: 200px;
+            scroll-snap-align: center;
+            position: relative;
+        }
+
+        .promo-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Main Content Container */
+        .main-content {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0; /* Removed padding to let cards touch edges if needed, added back in elements */
+        }
+
+        /* Categories Nav (Scrollable) */
+        .categories-wrapper {
+            background-color: var(--brand-white);
+            border-bottom: var(--border-width) solid var(--brand-black);
+            padding: 15px;
+            position: sticky;
+            top: 90px; /* Adjust based on header height */
+            z-index: 99;
+        }
+
+        .categories-container {
+            display: flex;
+            gap: 15px;
+            overflow-x: auto;
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .categories-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .category-btn {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--brand-black);
+            background-color: var(--brand-white);
+            border: 2px solid var(--brand-black);
+            border-radius: 25px;
+            padding: 8px 20px;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 2px 2px 0 var(--brand-black);
+        }
+
+        .category-btn.active {
+            background-color: var(--brand-orange);
+            color: var(--brand-white);
+            box-shadow: inset 2px 2px 0 rgba(0,0,0,0.2);
+            transform: translate(2px, 2px);
+        }
+        
+        /* Category Title Section */
+        .category-title {
+            padding: 20px 15px 10px;
+            font-size: 22px;
+            color: var(--brand-black);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .category-title::before {
+            content: '';
+            display: block;
+            width: 12px;
+            height: 12px;
+            background-color: var(--brand-yellow);
+            border: 2px solid var(--brand-black);
+            border-radius: 50%;
+        }
+
+        /* Menu List View (List style like the video) */
+        .menu-list {
+            padding: 0 15px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .menu-item {
+            display: flex;
+            background: var(--brand-white);
+            border: var(--border-width) solid var(--brand-black);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 4px 4px 0 var(--brand-black);
+            transition: transform 0.1s ease;
+            cursor: pointer;
+        }
+
+        .menu-item:active {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0 var(--brand-black);
+        }
+
+        .item-image {
+            width: 120px;
+            min-width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-right: var(--border-width) solid var(--brand-black);
+        }
+
+        .item-details {
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            flex-grow: 1;
+        }
+
+        .item-name {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--brand-black);
+            line-height: 1.2;
+            margin-bottom: 5px;
+        }
+        
+        .item-desc {
+            font-size: 12px;
+            color: #555;
+            line-height: 1.3;
+            margin-bottom: auto; /* Push price to bottom */
+            display: -webkit-box;
+            -webkit-line-clamp: 2; /* Show only 2 lines */
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .item-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .item-price {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--brand-orange);
+        }
+
+        .add-btn {
+            background-color: var(--brand-yellow);
+            color: var(--brand-black);
+            border: 2px solid var(--brand-black);
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            font-size: 16px;
+            box-shadow: 2px 2px 0 var(--brand-black);
+            cursor: pointer;
+        }
+
+        .extras-container {
+            display: flex;
+            gap: 15px;
+            overflow-x: auto;
+            padding: 0 15px 20px;
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .extras-container::-webkit-scrollbar {
+            display: none; /* Chrome, Safari */
+        }
+
+        .extra-box {
+            min-width: 100px;
+            flex: 0 0 auto;
+            background: var(--brand-white);
+            border: var(--border-width) solid var(--brand-black);
+            border-radius: 16px;
+            padding: 15px 10px;
+            text-align: center;
+            box-shadow: 4px 4px 0 var(--brand-black);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.1s ease;
+        }
+
+        .extra-box:active {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0 var(--brand-black);
+        }
+
+        .extra-box img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 10px;
+            border: 2px solid var(--brand-black);
+        }
+
+        .extra-name { 
+            font-weight: 800; 
+            font-size: 14px; 
+            color: var(--brand-black);
+            line-height: 1.2;
+            margin-bottom: 5px;
+        }
+
+        .extra-price { 
+            color: var(--brand-orange); 
+            font-size: 14px; 
+            font-weight: 700; 
+            font-family: 'Fredoka', sans-serif; 
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Sticky Header with Logo -->
+    <header class="header">
+        <img src="Logo with Lable tag.jpg" alt="Hello Burger Logo" class="header-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <h1 class="brand-font" style="color: var(--brand-white); display: none;">HELLO BURGER</h1>
+    </header>
+
+    <!-- Dynamic Promo Slider -->
+    <div class="promo-slider-container">
+        <div class="promo-slider" id="promo-slider">
+            <!-- Promo images will be injected here by JS -->
+        </div>
+    </div>
+
+    <main class="main-content">
+        
+        <!-- Categories Navigation -->
+        <div class="categories-wrapper">
+            <div class="categories-container" id="category-tabs">
+                <!-- Categories will be generated here by JS -->
+            </div>
+        </div>
+
+        <!-- Dynamic Menu Container -->
+        <div id="menu-container">
+            <!-- Sections will be generated here by JS -->
+        </div>
+
+    </main>
+
+    <script>
+        // ============================================================================
+        // 🌟 ပရိုမိုးရှင်း ပုံများ (ဒီနေရာမှာ Promotion ပုံ Link သို့မဟုတ် နာမည်များ ပြောင်းထည့်ပါ)
+        // ============================================================================
+        const promoData = [
+            "https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=1000&auto=format&fit=crop", // Promotion ပုံ ၁ (ဥပမာ - "promo1.jpg" ဟုပြင်ပါ)
+            "https://images.unsplash.com/photo-1586816001966-79b736744398?q=80&w=1000&auto=format&fit=crop"  // Promotion ပုံ ၂ (ဥပမာ - "promo2.jpg" ဟုပြင်ပါ)
+        ];
+
+        // ============================================================================
+        // 🍔 သင့်ဆိုင်ရဲ့ MENU စာရင်းများကို ဤနေရာတွင် ပြင်ဆင်နိုင်ပါသည်။
+        // ညွှန်ကြားချက် -
+        // 1. name  : ဟင်းလျာနာမည်
+        // 2. desc  : ပါဝင်ပစ္စည်း သို့မဟုတ် အကြောင်းအရာ
+        // 3. price : စျေးနှုန်း
+        // 4. image : ပုံ (အင်တာနက်က Link ထည့်လို့ရသလို၊ ကိုယ့် folder ထဲကပုံနာမည် "burger1.jpg" လို့လည်း ထည့်လို့ရပါတယ်)
+        // ============================================================================
+        const menuData = [
+            {
+                category: "Burgers", 
+                items: [
+                    { 
+                        name: "Classic HB Burger", 
+                        desc: "အမဲသားကြိတ်ကြော်၊ ဆလတ်ရွက်၊ ခရမ်းချဉ်သီး နှင့် HB ဆော့စ်", 
+                        price: "4,500 MMK", 
+                        image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&q=80" 
+                    },
+                    { 
+                        name: "Cheese Burst Burger", 
+                        desc: "ချိစ်အနှစ်များစွာပါဝင်သော အထူးဘာဂါ", 
+                        price: "5,500 MMK", 
+                        image: "https://images.unsplash.com/photo-1586816001966-79b736744398?w=400&q=80" 
+                    },
+                    { 
+                        name: "Spicy Chicken", 
+                        desc: "ကြက်သားကြော်၊ စပ်ရှရှ မာယိုနိစ် နှင့် ငရုတ်သီးချဉ်", 
+                        price: "5,000 MMK", 
+                        image: "https://images.unsplash.com/photo-1615719413546-198b25453f85?w=400&q=80" 
+                    },
+                    { 
+                        name: "Double Beef Monster", 
+                        desc: "အမဲသား ၂ ထပ် နှင့် ဘေကွန်", 
+                        price: "7,000 MMK", 
+                        image: "https://images.unsplash.com/photo-1594212848116-b8dbb0a149d8?w=400&q=80" 
+                    },
+                    { 
+                        name: "Mushroom Swiss", 
+                        desc: "မှိုကြော်နှင့် ဆွစ်ချိစ်အရည်ပျော်", 
+                        price: "6,000 MMK", 
+                        image: "https://images.unsplash.com/photo-1550547660-d9450f859349?w=400&q=80" 
+                    },
+                    { 
+                        name: "BBQ Bacon Ranch", 
+                        desc: "ဘေကွန်၊ ကြက်သွန်ကွင်းကြော် နှင့် ဘာဘီကျူးဆော့စ်", 
+                        price: "6,500 MMK", 
+                        image: "https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400&q=80" 
+                    },
+                    { 
+                        name: "Crispy Fish Burger", 
+                        desc: "ငါးအသားလွှာကြော် နှင့် တာတာဆော့စ်", 
+                        price: "5,000 MMK", 
+                        image: "https://images.unsplash.com/photo-1625813506062-0aeb1d7a094b?w=400&q=80" 
+                    },
+                    { 
+                        name: "Hawaiian Chicken", 
+                        desc: "ကြက်သား၊ နာနတ်သီးကင် နှင့် အချိုဆော့စ်", 
+                        price: "5,500 MMK", 
+                        image: "https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?w=400&q=80" 
+                    },
+                    { 
+                        name: "Truffle Beef", 
+                        desc: "အမဲသား နှင့် ထရက်ဖယ်မှိုဆော့စ်", 
+                        price: "8,000 MMK", 
+                        image: "https://images.unsplash.com/photo-1553979459-d2229ba7433b?w=400&q=80" 
+                    },
+                    { 
+                        name: "Veggie Delight", 
+                        desc: "သတ်သတ်လွတ် ဘာဂါအပြား နှင့် အသီးအရွက်", 
+                        price: "4,000 MMK", 
+                        image: "https://images.unsplash.com/photo-1520072959219-c595dc870360?w=400&q=80" 
+                    },
+                    { 
+                        name: "Spicy Beef Jalapeno", 
+                        desc: "အမဲသား နှင့် ဂျလာပီနို ငရုတ်သီးစိမ်း", 
+                        price: "6,000 MMK", 
+                        image: "https://images.unsplash.com/photo-1547584370-2cc98b8b8dc5?w=400&q=80" 
+                    },
+                    { 
+                        name: "Chicken Mince Combo", 
+                        desc: "ကြက်သားကြိတ်ကြော် (၂) ထပ်", 
+                        price: "5,800 MMK", 
+                        image: "https://images.unsplash.com/photo-1615719413546-198b25453f85?w=400&q=80" 
+                    }
+                ]
+            },
+            {
+                category: "Extras", // Extra များကို အလျားလိုက် ပြရန်
+                layout: "horizontal", 
+                items: [
+                    { name: "Egg", price: "+500 MMK", image: "https://images.unsplash.com/photo-1588165171080-c89acfa5ee83?w=400&q=80" },
+                    { name: "Bacon", price: "+1,500 MMK", image: "https://images.unsplash.com/photo-1528607929212-2636ec44253e?w=400&q=80" },
+                    { name: "Mayo", price: "+300 MMK", image: "https://images.unsplash.com/photo-1585032226651-759b368d7246?w=400&q=80" },
+                    { name: "Cheese", price: "+800 MMK", image: "https://images.unsplash.com/photo-1615761136599-86165bdfec04?w=400&q=80" }
+                ]
+            },
+            {
+                category: "Sides", 
+                items: [
+                    { name: "French Fries", desc: "ကြွပ်ရွသော အာလူးချောင်းကြော်", price: "2,000 MMK", image: "https://images.unsplash.com/photo-1576107232684-1279f390859f?w=400&q=80" },
+                    { name: "Onion Rings", desc: "ကြက်သွန်ကွင်းကြော်", price: "2,500 MMK", image: "https://images.unsplash.com/photo-1639024471283-03518883512d?w=400&q=80" },
+                    { name: "Chicken Nuggets", desc: "ကြွပ်ရွသော ကြက်သားတုံးကြော် (၆ တုံး)", price: "3,500 MMK", image: "https://images.unsplash.com/photo-1562967914-608f82629710?w=400&q=80" },
+                    { name: "Mozzarella Sticks", desc: "ချိစ်ဆွဲလို့ရတဲ့ ဒုတ်ထိုးချိစ်ကြော် (၄ ချောင်း)", price: "4,000 MMK", image: "https://images.unsplash.com/photo-1531749668029-2db88e4276c7?w=400&q=80" }
+                ]
+            },
+            {
+                category: "Drinks", 
+                items: [
+                    { name: "Coca Cola", desc: "အေးမြလန်းဆန်း ကိုကာကိုလာ", price: "1,000 MMK", image: "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=400&q=80" },
+                    { name: "Milkshake", desc: "ချောကလက် / စတော်ဘယ်ရီ မစ်ရှိတ်", price: "3,500 MMK", image: "https://images.unsplash.com/photo-1572490122747-3968b75bf699?w=400&q=80" },
+                    { name: "Fresh Lemonade", desc: "လတ်ဆတ်သော သံပရာရည်အေး", price: "1,500 MMK", image: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=400&q=80" },
+                    { name: "Iced Coffee", desc: "အေးမြသော ရေခဲကော်ဖီ", price: "2,500 MMK", image: "https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?w=400&q=80" }
+                ]
+            },
+            {
+                category: "COMBO Set",
+                items: [
+                    { 
+                        name: "Single Combo", 
+                        desc: "Classic Burger + Fries + Coke", 
+                        price: "7,000 MMK", 
+                        image: "https://images.unsplash.com/photo-1594212848116-b8dbb0a149d8?w=400&q=80" 
+                    },
+                    { 
+                        name: "Couple Combo", 
+                        desc: "Burgers (2) + Fries (2) + Drinks (2)", 
+                        price: "13,500 MMK", 
+                        image: "https://images.unsplash.com/photo-1550547660-d9450f859349?w=400&q=80" 
+                    },
+                    { 
+                        name: "Snack & Drink", 
+                        desc: "အာလူးချောင်းကြော် (၁) ပွဲ နှင့် ကိုကာကိုလာ (၁) ခွက်", 
+                        price: "3,500 MMK", 
+                        image: "https://images.unsplash.com/photo-1576107232684-1279f390859f?w=400&q=80" 
+                    },
+                    { 
+                        name: "Monster Combo", 
+                        desc: "Double Beef Burger၊ ချိစ်အာလူးကြော် နှင့် မစ်ရှိတ် (၁) ခွက်", 
+                        price: "14,000 MMK", 
+                        image: "https://images.unsplash.com/photo-1586816001966-79b736744398?w=400&q=80" 
+                    }
+                ]
+            }
+        ];
+
+        // ============================================================================
+        // ၂။ UI Render လုပ်ခြင်း (ဒီအောက်က Code တွေကို ပြင်စရာမလိုပါဘူး)
+        // ============================================================================
+        const categoryTabsContainer = document.getElementById('category-tabs');
+        const menuContainer = document.getElementById('menu-container');
+        const promoSliderContainer = document.getElementById('promo-slider');
+
+        function renderPromos() {
+            promoData.forEach(imgUrl => {
+                const slide = document.createElement('div');
+                slide.className = 'promo-slide';
+                slide.innerHTML = `<img src="${imgUrl}" alt="Promotion" loading="lazy">`;
+                promoSliderContainer.appendChild(slide);
+            });
+
+            // ၃ စက္ကန့်တစ်ခါ အလိုအလျောက် ပုံရွှေ့ပေးမည့်စနစ်
+            if (promoData.length > 1) {
+                let currentSlide = 0;
+                setInterval(() => {
+                    currentSlide = (currentSlide + 1) % promoData.length;
+                    promoSliderContainer.scrollTo({
+                        left: currentSlide * promoSliderContainer.offsetWidth,
+                        behavior: 'smooth'
+                    });
+                }, 3000);
+            }
+        }
+
+        function renderMenu() {
+            menuData.forEach((section, index) => {
+                // ၁။ Category Tabs ဖန်တီးခြင်း
+                const tab = document.createElement('button');
+                tab.className = `category-btn ${index === 0 ? 'active' : ''}`;
+                tab.textContent = section.category;
+                // Tab နှိပ်ရင် သက်ဆိုင်ရာ အပိုင်းကို Scroll သွားဖို့
+                tab.onclick = () => {
+                    document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
+                    tab.classList.add('active');
+                    
+                    const targetSection = document.getElementById(`section-${section.category}`);
+                    // Offset for sticky headers
+                    const yOffset = -140; 
+                    const y = targetSection.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                    window.scrollTo({top: y, behavior: 'smooth'});
+                };
+                categoryTabsContainer.appendChild(tab);
+
+                // ၂။ Menu Items List ဖန်တီးခြင်း
+                const sectionDiv = document.createElement('div');
+                sectionDiv.id = `section-${section.category}`;
+                
+                // ခေါင်းစဉ် (ဥပမာ - Burgers)
+                const sectionTitle = document.createElement('h2');
+                sectionTitle.className = 'category-title brand-font';
+                sectionTitle.textContent = section.category;
+                sectionDiv.appendChild(sectionTitle);
+
+                if (section.layout === 'horizontal') {
+                    // Extras အကွက်လေးများအတွက် (အလျားလိုက်)
+                    const hListDiv = document.createElement('div');
+                    hListDiv.className = 'extras-container';
+                    
+                    section.items.forEach(item => {
+                        const box = document.createElement('div');
+                        box.className = 'extra-box';
+                        box.innerHTML = `
+                            <img src="${item.image}" alt="${item.name}" loading="lazy">
+                            <span class="extra-name">${item.name}</span>
+                            <span class="extra-price">${item.price}</span>
+                        `;
+                        hListDiv.appendChild(box);
+                    });
+                    
+                    sectionDiv.appendChild(hListDiv);
+                } else {
+                    // ပုံမှန် ဟင်းလျာများအတွက် (အပေါ်/အောက် List)
+                    const listDiv = document.createElement('div');
+                    listDiv.className = 'menu-list';
+
+                    section.items.forEach(item => {
+                        const itemCard = document.createElement('div');
+                        itemCard.className = 'menu-item';
+                        itemCard.innerHTML = `
+                            <img src="${item.image}" alt="${item.name}" class="item-image" loading="lazy">
+                            <div class="item-details">
+                                <div>
+                                    <h3 class="item-name brand-font">${item.name}</h3>
+                                    <p class="item-desc">${item.desc}</p>
+                                </div>
+                                <div class="item-bottom">
+                                    <span class="item-price">${item.price}</span>
+                                    <button class="add-btn"><i class="fas fa-plus"></i></button>
+                                </div>
+                            </div>
+                        `;
+                        listDiv.appendChild(itemCard);
+                    });
+
+                    sectionDiv.appendChild(listDiv);
+                }
+
+                menuContainer.appendChild(sectionDiv);
+            });
+        }
+
+        // Initialize Render
+        renderPromos();
+        renderMenu();
+
+        // ၃။ Scroll ဆွဲချိန်မှာ Active Category ပြောင်းပေးခြင်း (Scroll Spy)
+        window.addEventListener('scroll', () => {
+            let current = '';
+            const sections = document.querySelectorAll('#menu-container > div');
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                // Header + Category Tab height ခန့်မှန်းခြေ
+                if (pageYOffset >= sectionTop - 160) {
+                    current = section.getAttribute('id').replace('section-', '');
+                }
+            });
+
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent === current) {
+                    btn.classList.add('active');
+                    // Scroll container ကို Active ဖြစ်တဲ့ Tab ဆီ ရွှေ့ပေးရန်
+                    btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                }
+            });
+        });
+
+    </script>
+</body>
+</html>
