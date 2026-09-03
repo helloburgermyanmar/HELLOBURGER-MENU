@@ -44,12 +44,12 @@
 
         /* Header / Hero Section */
         .header {
-            background-color: var(--brand-black);
+            background-color: var(--brand-orange);
             padding: 20px 15px;
             display: flex;
             justify-content: center;
             align-items: center;
-            border-bottom: var(--border-width) solid var(--brand-orange);
+            border-bottom: var(--border-width) solid var(--brand-black);
             position: sticky;
             top: 0;
             z-index: 100;
@@ -314,13 +314,77 @@
             font-family: 'Fredoka', sans-serif; 
         }
 
+        /* Contact Section */
+        .contact-section {
+            padding: 35px 15px 45px;
+            background-color: var(--brand-yellow);
+            border-top: var(--border-width) solid var(--brand-black);
+            margin-top: 20px;
+        }
+
+        .mascot-container {
+            display: flex;
+            justify-content: center; /* အလယ်တည့်တည့်ဖြစ်စေရန် */
+            align-items: center;
+            margin-bottom: 15px; /* အောက်က ခေါင်းစဉ်နဲ့ နည်းနည်းခွာထားရန် */
+        }
+
+        .mascot-image {
+            height: 150px; /* Mascot ရဲ့ အမြင့် (ပိုကြီး/သေး ချင်ရင် ဒီမှာ ပြင်ပါ) */
+            width: auto;
+            object-fit: contain; /* PNG ပုံအချိုးအစား မပျက်စေရန် */
+            /* လေးထောင့် Box ပုံစံများ (Border, Background, Shadow) အားလုံး ဖယ်ရှားလိုက်ပါပြီ */
+        }
+
+        .contact-title {
+            font-size: 24px;
+            color: var(--brand-black);
+            margin-bottom: 25px;
+            text-align: center; /* ခေါင်းစဉ်ကို အလယ်ပို့ထားပါတယ် */
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center; /* Icon များကို အလယ်တည့်တည့် ညီသွားအောင် လုပ်ထားပါတယ် */
+            align-items: center;
+            gap: 20px; /* Icon တစ်ခုနဲ့တစ်ခု အကွာအဝေး */
+            flex-wrap: wrap; /* ဖုန်းသေးရင် အောက်တစ်ကြောင်းဆင်းသွားအောင် */
+        }
+
+        .social-btn {
+            width: 70px; /* Icon အကွက် ပိုကြီးသွားပါပြီ (အရင်က 60px) */
+            height: 70px; /* Icon အကွက် ပိုကြီးသွားပါပြီ */
+            border-radius: 50%; /* အဝိုင်းပုံစံ ဖြစ်သွားပါပြီ */
+            background-color: var(--brand-white);
+            border: var(--border-width) solid var(--brand-black);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--brand-black);
+            font-size: 32px; /* Icon ပုံလေးတွေ ပိုကြီးသွားပါပြီ (အရင်က 24px) */
+            text-decoration: none;
+            box-shadow: 4px 4px 0 var(--brand-black);
+            transition: transform 0.1s ease, box-shadow 0.1s ease;
+        }
+
+        .social-btn:active {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0 var(--brand-black);
+        }
+
+        /* Icon လေးတွေရဲ့ သက်ဆိုင်ရာ အရောင်လေးတွေ ထည့်ပေးထားပါတယ် */
+        .social-btn.facebook { color: #1877F2; }
+        .social-btn.tiktok { color: #000000; }
+        .social-btn.instagram { color: #E4405F; }
+        .social-btn.phone { color: #128C7E; } 
+
     </style>
 </head>
 <body>
 
     <!-- Sticky Header with Logo -->
     <header class="header">
-        <img src="Logo with Lable tag.jpg" alt="Hello Burger Logo" class="header-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <img src="logo.png" alt="Hello Burger Logo" class="header-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
         <h1 class="brand-font" style="color: var(--brand-white); display: none;">HELLO BURGER</h1>
     </header>
 
@@ -343,6 +407,36 @@
         <!-- Dynamic Menu Container -->
         <div id="menu-container">
             <!-- Sections will be generated here by JS -->
+        </div>
+
+        <!-- Contact Section -->
+        <div class="contact-section">
+            
+            <!-- Mascot နေရာလွတ် -->
+            <div class="mascot-container">
+                <!-- mascot.png နေရာမှာ သင့်ဆိုင်ရဲ့ Mascot ပုံနာမည် အစားထိုးပါ -->
+                <img src="mascot.png" alt="Hello Burger Mascot" class="mascot-image" onerror="this.src='https://placehold.co/120x120/FF6600/FFFFFF?text=Mascot'">
+            </div>
+
+            <h2 class="contact-title brand-font">Contact Us</h2>
+            <div class="social-links">
+                <!-- Phone -->
+                <a href="tel:+959968885291" class="social-btn phone" title="Call Us">
+                    <i class="fas fa-phone"></i>
+                </a>
+                <!-- Facebook -->
+                <a href="https://www.facebook.com/profile.php?id=100069918460934" class="social-btn facebook" target="_blank" title="Facebook Page">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <!-- TikTok -->
+                <a href="https://www.tiktok.com/@helloburgermyanmar" class="social-btn tiktok" target="_blank" title="TikTok">
+                    <i class="fab fa-tiktok"></i>
+                </a>
+                <!-- Instagram -->
+                <a href="https://www.instagram.com/helloburger_myanmar/?hl=en" class="social-btn instagram" target="_blank" title="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </div>
         </div>
 
     </main>
@@ -592,7 +686,10 @@
                                 </div>
                                 <div class="item-bottom">
                                     <span class="item-price">${item.price}</span>
-                                    <button class="add-btn"><i class="fas fa-plus"></i></button>
+                                    <button class="add-btn">
+                                        <!-- "icon-logo.png" နေရာမှာ သင့်ရဲ့ ဒုတိယ Logo ပုံနာမည် ပြင်ထည့်ပါ -->
+                                        <img src="icon-logo.png" alt="Add" onerror="this.src='https://placehold.co/30x30/FFD400/000000?text=+'">
+                                    </button>
                                 </div>
                             </div>
                         `;
