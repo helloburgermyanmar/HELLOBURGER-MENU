@@ -5,16 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hello Burger | Menu</title>
     
-    <!-- Importing Rounded Bold Sans Serif Fonts (Fredoka for Headers, Nunito for Body) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <style>
         :root {
-            /* Brand Lookbook Colors */
             --brand-orange: #FF6600;
             --brand-yellow: #FFD400;
             --brand-black: #222222;
@@ -27,7 +24,7 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            -webkit-tap-highlight-color: transparent; /* Remove tap highlight on mobile */
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
@@ -35,14 +32,13 @@
             background-color: var(--bg-light);
             color: var(--brand-black);
             line-height: 1.6;
-            padding-bottom: 80px; /* Space for bottom nav or just breathing room */
+            padding-bottom: 80px;
         }
 
         h1, h2, h3, .brand-font {
             font-family: 'Fredoka', sans-serif;
         }
 
-        /* Header / Hero Section */
         .header {
             background-color: var(--brand-orange);
             padding: 20px 15px;
@@ -57,11 +53,10 @@
         }
 
         .header-logo {
-            max-height: 50px; /* Smaller logo for sticky header */
+            max-height: 50px;
             width: auto;
         }
 
-        /* Promo Slider Section */
         .promo-slider-container {
             width: 100%;
             position: relative;
@@ -74,16 +69,16 @@
             display: flex;
             overflow-x: auto;
             scroll-snap-type: x mandatory;
-            scrollbar-width: none; /* Firefox */
+            scrollbar-width: none;
             -webkit-overflow-scrolling: touch;
         }
 
         .promo-slider::-webkit-scrollbar {
-            display: none; /* Chrome, Safari, Opera */
+            display: none;
         }
 
         .promo-slide {
-            flex: 0 0 100%; /* Takes full width of the container */
+            flex: 0 0 100%;
             height: 200px;
             scroll-snap-align: center;
             position: relative;
@@ -96,20 +91,18 @@
             display: block;
         }
 
-        /* Main Content Container */
         .main-content {
             max-width: 600px;
             margin: 0 auto;
-            padding: 0; /* Removed padding to let cards touch edges if needed, added back in elements */
+            padding: 0;
         }
 
-        /* Categories Nav (Scrollable) */
         .categories-wrapper {
             background-color: var(--brand-white);
             border-bottom: var(--border-width) solid var(--brand-black);
             padding: 15px;
             position: sticky;
-            top: 90px; /* Adjust based on header height */
+            top: 90px;
             z-index: 99;
         }
 
@@ -147,7 +140,6 @@
             transform: translate(2px, 2px);
         }
         
-        /* Category Title Section */
         .category-title {
             padding: 20px 15px 10px;
             font-size: 22px;
@@ -167,7 +159,6 @@
             border-radius: 50%;
         }
 
-        /* Menu List View (List style like the video) */
         .menu-list {
             padding: 0 15px 20px;
             display: flex;
@@ -219,9 +210,9 @@
             font-size: 12px;
             color: #555;
             line-height: 1.3;
-            margin-bottom: auto; /* Push price to bottom */
+            margin-bottom: auto;
             display: -webkit-box;
-            -webkit-line-clamp: 2; /* Show only 2 lines */
+            -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
@@ -241,19 +232,23 @@
         }
 
         .add-btn {
-            background-color: var(--brand-yellow);
-            color: var(--brand-black);
-            border: 2px solid var(--brand-black);
-            border-radius: 50%;
+            background-color: var(--brand-white);
+            border: none;
             width: 32px;
             height: 32px;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-weight: bold;
-            font-size: 16px;
-            box-shadow: 2px 2px 0 var(--brand-black);
             cursor: pointer;
+            padding: 0;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .add-btn img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .extras-container {
@@ -266,7 +261,7 @@
         }
 
         .extras-container::-webkit-scrollbar {
-            display: none; /* Chrome, Safari */
+            display: none;
         }
 
         .extra-box {
@@ -314,54 +309,52 @@
             font-family: 'Fredoka', sans-serif; 
         }
 
-        /* Contact Section */
         .contact-section {
             padding: 35px 15px 45px;
-            background-color: transparent; /* အရောင်ကိုဖျောက်ပြီး မူလနောက်ခံအတိုင်းဖြစ်အောင် ပြင်ထားပါသည် */
+            background-color: transparent;
             border-top: none; 
             margin-top: 20px;
         }
 
         .mascot-container {
             display: flex;
-            justify-content: center; /* အလယ်တည့်တည့်ဖြစ်စေရန် */
+            justify-content: center;
             align-items: center;
-            margin-bottom: 15px; /* အောက်က ခေါင်းစဉ်နဲ့ နည်းနည်းခွာထားရန် */
+            margin-bottom: 15px;
         }
 
         .mascot-image {
-            height: 150px; /* Mascot ရဲ့ အမြင့် (ပိုကြီး/သေး ချင်ရင် ဒီမှာ ပြင်ပါ) */
+            height: 150px;
             width: auto;
-            object-fit: contain; /* PNG ပုံအချိုးအစား မပျက်စေရန် */
-            /* လေးထောင့် Box ပုံစံများ (Border, Background, Shadow) အားလုံး ဖယ်ရှားလိုက်ပါပြီ */
+            object-fit: contain;
         }
 
         .contact-title {
             font-size: 24px;
             color: var(--brand-black);
             margin-bottom: 25px;
-            text-align: center; /* ခေါင်းစဉ်ကို အလယ်ပို့ထားပါတယ် */
+            text-align: center;
         }
 
         .social-links {
             display: flex;
-            justify-content: center; /* Icon များကို အလယ်တည့်တည့် ညီသွားအောင် လုပ်ထားပါတယ် */
+            justify-content: center;
             align-items: center;
-            gap: 20px; /* Icon တစ်ခုနဲ့တစ်ခု အကွာအဝေး */
-            flex-wrap: wrap; /* ဖုန်းသေးရင် အောက်တစ်ကြောင်းဆင်းသွားအောင် */
+            gap: 20px;
+            flex-wrap: wrap;
         }
 
         .social-btn {
-            width: 70px; /* Icon အကွက် ပိုကြီးသွားပါပြီ (အရင်က 60px) */
-            height: 70px; /* Icon အကွက် ပိုကြီးသွားပါပြီ */
-            border-radius: 50%; /* အဝိုင်းပုံစံ ဖြစ်သွားပါပြီ */
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
             background-color: var(--brand-white);
             border: var(--border-width) solid var(--brand-black);
             display: flex;
             justify-content: center;
             align-items: center;
             color: var(--brand-black);
-            font-size: 32px; /* Icon ပုံလေးတွေ ပိုကြီးသွားပါပြီ (အရင်က 24px) */
+            font-size: 32px;
             text-decoration: none;
             box-shadow: 4px 4px 0 var(--brand-black);
             transition: transform 0.1s ease, box-shadow 0.1s ease;
@@ -372,7 +365,6 @@
             box-shadow: 2px 2px 0 var(--brand-black);
         }
 
-        /* Icon လေးတွေရဲ့ သက်ဆိုင်ရာ အရောင်လေးတွေ ထည့်ပေးထားပါတယ် */
         .social-btn.facebook { color: #1877F2; }
         .social-btn.tiktok { color: #000000; }
         .social-btn.instagram { color: #E4405F; }
@@ -382,57 +374,42 @@
 </head>
 <body>
 
-    <!-- Sticky Header with Logo -->
     <header class="header">
         <img src="logo.png" alt="Hello Burger Logo" class="header-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
         <h1 class="brand-font" style="color: var(--brand-white); display: none;">HELLO BURGER</h1>
     </header>
 
-    <!-- Dynamic Promo Slider -->
     <div class="promo-slider-container">
         <div class="promo-slider" id="promo-slider">
-            <!-- Promo images will be injected here by JS -->
         </div>
     </div>
 
     <main class="main-content">
         
-        <!-- Categories Navigation -->
         <div class="categories-wrapper">
             <div class="categories-container" id="category-tabs">
-                <!-- Categories will be generated here by JS -->
             </div>
         </div>
 
-        <!-- Dynamic Menu Container -->
         <div id="menu-container">
-            <!-- Sections will be generated here by JS -->
         </div>
 
-        <!-- Contact Section -->
         <div class="contact-section">
-            
-            <!-- Mascot နေရာလွတ် -->
             <div class="mascot-container">
-                <!-- mascot.png နေရာမှာ သင့်ဆိုင်ရဲ့ Mascot ပုံနာမည် အစားထိုးပါ -->
                 <img src="mascot.png" alt="Hello Burger Mascot" class="mascot-image" onerror="this.src='https://placehold.co/120x120/FF6600/FFFFFF?text=Mascot'">
             </div>
 
             <h2 class="contact-title brand-font">Contact Us</h2>
             <div class="social-links">
-                <!-- Phone -->
                 <a href="tel:+959968885291" class="social-btn phone" title="Call Us">
                     <i class="fas fa-phone"></i>
                 </a>
-                <!-- Facebook -->
                 <a href="https://www.facebook.com/profile.php?id=100069918460934" class="social-btn facebook" target="_blank" title="Facebook Page">
                     <i class="fab fa-facebook-f"></i>
                 </a>
-                <!-- TikTok -->
                 <a href="https://www.tiktok.com/@helloburgermyanmar" class="social-btn tiktok" target="_blank" title="TikTok">
                     <i class="fab fa-tiktok"></i>
                 </a>
-                <!-- Instagram -->
                 <a href="https://www.instagram.com/helloburger_myanmar/?hl=en" class="social-btn instagram" target="_blank" title="Instagram">
                     <i class="fab fa-instagram"></i>
                 </a>
@@ -442,22 +419,11 @@
     </main>
 
     <script>
-        // ============================================================================
-        // 🌟 ပရိုမိုးရှင်း ပုံများ (ဒီနေရာမှာ Promotion ပုံ Link သို့မဟုတ် နာမည်များ ပြောင်းထည့်ပါ)
-        // ============================================================================
         const promoData = [
-            "https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=1000&auto=format&fit=crop", // Promotion ပုံ ၁ (ဥပမာ - "promo1.jpg" ဟုပြင်ပါ)
-            "https://images.unsplash.com/photo-1586816001966-79b736744398?q=80&w=1000&auto=format&fit=crop"  // Promotion ပုံ ၂ (ဥပမာ - "promo2.jpg" ဟုပြင်ပါ)
+            "https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=1000&auto=format&fit=crop",
+            "https://images.unsplash.com/photo-1586816001966-79b736744398?q=80&w=1000&auto=format&fit=crop"
         ];
 
-        // ============================================================================
-        // 🍔 သင့်ဆိုင်ရဲ့ MENU စာရင်းများကို ဤနေရာတွင် ပြင်ဆင်နိုင်ပါသည်။
-        // ညွှန်ကြားချက် -
-        // 1. name  : ဟင်းလျာနာမည်
-        // 2. desc  : ပါဝင်ပစ္စည်း သို့မဟုတ် အကြောင်းအရာ
-        // 3. price : စျေးနှုန်း
-        // 4. image : ပုံ (အင်တာနက်က Link ထည့်လို့ရသလို၊ ကိုယ့် folder ထဲကပုံနာမည် "burger1.jpg" လို့လည်း ထည့်လို့ရပါတယ်)
-        // ============================================================================
         const menuData = [
             {
                 category: "Burgers", 
@@ -537,7 +503,7 @@
                 ]
             },
             {
-                category: "Extras", // Extra များကို အလျားလိုက် ပြရန်
+                category: "Extras",
                 layout: "horizontal", 
                 items: [
                     { name: "Egg", price: "+500 MMK", image: "https://images.unsplash.com/photo-1588165171080-c89acfa5ee83?w=400&q=80" },
@@ -595,9 +561,6 @@
             }
         ];
 
-        // ============================================================================
-        // ၂။ UI Render လုပ်ခြင်း (ဒီအောက်က Code တွေကို ပြင်စရာမလိုပါဘူး)
-        // ============================================================================
         const categoryTabsContainer = document.getElementById('category-tabs');
         const menuContainer = document.getElementById('menu-container');
         const promoSliderContainer = document.getElementById('promo-slider');
@@ -610,7 +573,6 @@
                 promoSliderContainer.appendChild(slide);
             });
 
-            // ၃ စက္ကန့်တစ်ခါ အလိုအလျောက် ပုံရွှေ့ပေးမည့်စနစ်
             if (promoData.length > 1) {
                 let currentSlide = 0;
                 setInterval(() => {
@@ -625,35 +587,30 @@
 
         function renderMenu() {
             menuData.forEach((section, index) => {
-                // ၁။ Category Tabs ဖန်တီးခြင်း
                 const tab = document.createElement('button');
                 tab.className = `category-btn ${index === 0 ? 'active' : ''}`;
                 tab.textContent = section.category;
-                // Tab နှိပ်ရင် သက်ဆိုင်ရာ အပိုင်းကို Scroll သွားဖို့
+                
                 tab.onclick = () => {
                     document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
                     tab.classList.add('active');
                     
                     const targetSection = document.getElementById(`section-${section.category}`);
-                    // Offset for sticky headers
                     const yOffset = -140; 
                     const y = targetSection.getBoundingClientRect().top + window.pageYOffset + yOffset;
                     window.scrollTo({top: y, behavior: 'smooth'});
                 };
                 categoryTabsContainer.appendChild(tab);
 
-                // ၂။ Menu Items List ဖန်တီးခြင်း
                 const sectionDiv = document.createElement('div');
                 sectionDiv.id = `section-${section.category}`;
                 
-                // ခေါင်းစဉ် (ဥပမာ - Burgers)
                 const sectionTitle = document.createElement('h2');
                 sectionTitle.className = 'category-title brand-font';
                 sectionTitle.textContent = section.category;
                 sectionDiv.appendChild(sectionTitle);
 
                 if (section.layout === 'horizontal') {
-                    // Extras အကွက်လေးများအတွက် (အလျားလိုက်)
                     const hListDiv = document.createElement('div');
                     hListDiv.className = 'extras-container';
                     
@@ -670,7 +627,6 @@
                     
                     sectionDiv.appendChild(hListDiv);
                 } else {
-                    // ပုံမှန် ဟင်းလျာများအတွက် (အပေါ်/အောက် List)
                     const listDiv = document.createElement('div');
                     listDiv.className = 'menu-list';
 
@@ -687,7 +643,6 @@
                                 <div class="item-bottom">
                                     <span class="item-price">${item.price}</span>
                                     <button class="add-btn">
-                                        <!-- "icon-logo.png" နေရာမှာ သင့်ရဲ့ ဒုတိယ Logo ပုံနာမည် ပြင်ထည့်ပါ -->
                                         <img src="icon-logo.png" alt="Add" onerror="this.src='https://placehold.co/30x30/FFD400/000000?text=+'">
                                     </button>
                                 </div>
@@ -703,18 +658,15 @@
             });
         }
 
-        // Initialize Render
         renderPromos();
         renderMenu();
 
-        // ၃။ Scroll ဆွဲချိန်မှာ Active Category ပြောင်းပေးခြင်း (Scroll Spy)
         window.addEventListener('scroll', () => {
             let current = '';
             const sections = document.querySelectorAll('#menu-container > div');
             
             sections.forEach(section => {
                 const sectionTop = section.offsetTop;
-                // Header + Category Tab height ခန့်မှန်းခြေ
                 if (pageYOffset >= sectionTop - 160) {
                     current = section.getAttribute('id').replace('section-', '');
                 }
@@ -724,7 +676,6 @@
                 btn.classList.remove('active');
                 if (btn.textContent === current) {
                     btn.classList.add('active');
-                    // Scroll container ကို Active ဖြစ်တဲ့ Tab ဆီ ရွှေ့ပေးရန်
                     btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
                 }
             });
