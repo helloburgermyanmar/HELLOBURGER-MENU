@@ -214,6 +214,7 @@
         }
         
         .item-desc {
+            font-family: 'Nunito', sans-serif; /* ဒီစာကြောင်းလေး ထပ်ပေါင်းထည့်လိုက်ပါတယ် */
             font-size: 12px;
             color: #555;
             line-height: 1.3;
@@ -501,7 +502,7 @@
                     },
                     { 
                         name: "SAUSAGE HOTDOG", 
-                        desc: "A satisfying hot dog made for sausage lovers.", 
+                        desc: "ကA satisfying hot dog made for sausage lovers.", 
                         price: "7,500 MMK", 
                         image: "burger12.webp" 
                     }
@@ -541,24 +542,28 @@
                     { 
                         name: "Single Combo", 
                         desc: "Classic Burger + Fries + Coke", 
+                        originalPrice: "8,500 MMK",
                         price: "7,000 MMK", 
                         image: "combo1.webp" 
                     },
                     { 
                         name: "Couple Combo", 
                         desc: "Burgers (2) + Fries (2) + Drinks (2)", 
+                        originalPrice: "15,000 MMK",
                         price: "13,500 MMK", 
                         image: "combo2.webp" 
                     },
                     { 
                         name: "Snack & Drink", 
                         desc: "အာလူးချောင်းကြော် (၁) ပွဲ နှင့် ကိုကာကိုလာ (၁) ခွက်", 
+                        originalPrice: "4,500 MMK",
                         price: "3,500 MMK", 
                         image: "combo3.webp" 
                     },
                     { 
                         name: "Monster Combo", 
                         desc: "Double Beef Burger၊ ချိစ်အာလူးကြော် နှင့် မစ်ရှိတ် (၁) ခွက်", 
+                        originalPrice: "16,000 MMK",
                         price: "14,000 MMK", 
                         image: "combo4.webp" 
                     }
@@ -638,6 +643,15 @@
                     section.items.forEach(item => {
                         const itemCard = document.createElement('div');
                         itemCard.className = 'menu-item';
+                        
+                        // Handle price display (check if originalPrice exists)
+                        const priceDisplay = item.originalPrice 
+                            ? `<div style="display: flex; flex-direction: column;">
+                                   <span style="text-decoration: line-through; color: #888; font-size: 13px; line-height: 1; margin-bottom: 2px;">${item.originalPrice}</span>
+                                   <span class="item-price">${item.price}</span>
+                               </div>`
+                            : `<span class="item-price">${item.price}</span>`;
+
                         itemCard.innerHTML = `
                             <img src="${item.image}" alt="${item.name}" class="item-image" loading="lazy">
                             <div class="item-details">
@@ -646,7 +660,7 @@
                                     <p class="item-desc">${item.desc}</p>
                                 </div>
                                 <div class="item-bottom">
-                                    <span class="item-price">${item.price}</span>
+                                    ${priceDisplay}
                                     <button class="add-btn">
                                         <img src="icon-logo.png" alt="Add" onerror="this.src='https://placehold.co/30x30/FFD400/000000?text=+'">
                                     </button>
